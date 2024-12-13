@@ -18,8 +18,13 @@ int noteDurations2[] = { 500, 500, 500, 500, 500, 500, 1000,
 
 int melody1[] = {
 
-
-  NOTE_C4, NOTE_G3, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4
+  NOTE_E5, NOTE_E5, NOTE_E5,  // Jingle bells
+  NOTE_E5, NOTE_E5, NOTE_E5,  // Jingle bells
+  NOTE_E5, NOTE_G5, NOTE_C5, NOTE_D5, NOTE_E5, // Jingle all the way
+  NOTE_F5, NOTE_F5, NOTE_F5, NOTE_F5,          // Oh what fun it is to ride
+  NOTE_F5, NOTE_E5, NOTE_E5, NOTE_E5, NOTE_E5, // In a one-horse open sleigh
+  NOTE_E5, NOTE_D5, NOTE_D5, NOTE_E5, NOTE_D5, // Hey!
+  NOTE_G5
 
 };
 
@@ -27,9 +32,13 @@ int melody1[] = {
 // note durations: 4 = quarter note, 8 = eighth note, etc.:
 
 int noteDurations[] = {
-
-
-  4, 8, 8, 4, 4, 4, 4, 4
+  8, 8, 4,  // Jingle bells
+  8, 8, 4,  // Jingle bells
+  8, 8, 8, 8, 2, // Jingle all the way
+  8, 8, 8, 8,    // Oh what fun it is to ride
+  8, 8, 8, 8, 4, // In a one-horse open sleigh
+  8, 8, 8, 8, 2, // Hey!
+  2
 
 };
 
@@ -70,31 +79,10 @@ void loop() {
     }
 
     while(playgreen){
-   for (int thisNote = 0; thisNote < 8; thisNote++) {
-
-
-    // to calculate the note duration, take one second divided by the note type.
-
-
-    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
-
-
+   for (int thisNote = 0; thisNote <sizeof(melody1) / sizeof(melody1[0]); thisNote++) {
     int noteDuration = 1000 / noteDurations[thisNote];
-
-
     tone(9, melody1[thisNote], noteDuration);
-
-
-    // to distinguish the notes, set a minimum time between them.
-
-
-    // the note's duration + 30% seems to work well:
-
-
-    int pauseBetweenNotes = noteDuration * 1.30;
-
-
-    delay(pauseBetweenNotes);
+    delay(noteDuration * 1.30); // Slight pause between notes
 
      if (digitalRead(red) == HIGH) {
       playred = true;
